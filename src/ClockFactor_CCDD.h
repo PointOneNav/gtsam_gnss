@@ -29,7 +29,7 @@ public:
    * @param dt      Time interval (t2-t1)
    * @param model   Gaussian noise model (nc dimension)
    */
-  ClockFactor_CCDD(gtsam::Key keyC1, gtsam::Key keyC2, gtsam::Key keyD1, gtsam::Key keyD2, const double& dt, const gtsam::SharedNoiseModel& model)
+  ClockFactor_CCDD(gtsam::Key keyC1, gtsam::Key keyC2, gtsam::Key keyD1, gtsam::Key keyD2, const double dt, const gtsam::SharedNoiseModel& model)
   : Base(model, keyC1, keyC2, keyD1, keyD2), dt_(dt) {};
 
   ~ClockFactor_CCDD() override {}

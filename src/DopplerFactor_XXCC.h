@@ -42,8 +42,8 @@ public:
                      gtsam::Key keyC1,
                      gtsam::Key keyC2,
                      const gtsam::Vector& losvec,
-                     const double& prr,
-                     const double& dt,
+                     const double prr,
+                     const double dt,
                      const gtsam::Vector& inix1,
                      const gtsam::Vector& inix2,
                      const gtsam::SharedNoiseModel& model)
@@ -64,7 +64,7 @@ public:
     // Compute error
     gtsam::Vector dx = ((x2 - inix2_) - (x1 - inix1_)) / dt_;
     gtsam::Vector dc = (c2 - c1) / dt_;
-    
+
     size_t nc = c1.size();
     gtsam::Vector hc = gtsam::Vector::Zero(nc);
     hc(0) = 1;

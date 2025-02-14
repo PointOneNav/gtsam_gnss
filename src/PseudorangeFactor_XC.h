@@ -35,8 +35,8 @@ public:
   PseudorangeFactor_XC(gtsam::Key keyX,
                        gtsam::Key keyC,
                        const gtsam::Vector& losvec,
-                       const double& pr,
-                       const int& sysidx,
+                       const double pr,
+                       const int sysidx,
                        const gtsam::Vector& inix,
                        const gtsam::SharedNoiseModel& model)
   : Base(model, keyX, keyC), losvec_(losvec), pr_(pr), sysidx_(sysidx), inix_(inix) {};

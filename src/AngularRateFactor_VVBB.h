@@ -28,7 +28,7 @@ public:
    * @param axang   Angle change computed from angular rate (1 dimension)
    */
   AngularRateFactor_VVBB(
-    gtsam::Key keyV1, gtsam::Key keyV2, gtsam::Key keyB1, gtsam::Key keyB2, const double& axang, const gtsam::SharedNoiseModel& model)
+    gtsam::Key keyV1, gtsam::Key keyV2, gtsam::Key keyB1, gtsam::Key keyB2, const double axang, const gtsam::SharedNoiseModel& model)
   : Base(model, keyV1, keyV2, keyB1, keyB2), axang_(axang) {};
 
   ~AngularRateFactor_VVBB() override {}

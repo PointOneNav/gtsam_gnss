@@ -39,9 +39,9 @@ public:
   CarrierPhaseFactor_XB(gtsam::Key keyX,
                         gtsam::Key keyB,
                         const gtsam::Vector& losvec,
-                        const double& cp,
-                        const int& biasidx,
-                        const double& lam,
+                        const double cp,
+                        const int biasidx,
+                        const double lam,
                         const gtsam::Vector& inix,
                         const gtsam::SharedNoiseModel& model)
   : Base(model, keyX, keyB), losvec_(losvec), cp_(cp), biasidx_(biasidx), refbiasidx_(-1), lam_(lam), inix_(inix) {};
@@ -61,10 +61,10 @@ public:
   CarrierPhaseFactor_XB(gtsam::Key keyX,
                         gtsam::Key keyB,
                         const gtsam::Vector& losvec,
-                        const double& cp,
-                        const int& biasidx,
-                        const int& refbiasidx,
-                        const double& lam,
+                        const double cp,
+                        const int biasidx,
+                        const int refbiasidx,
+                        const double lam,
                         const gtsam::Vector& inix,
                         const gtsam::SharedNoiseModel& model)
   : Base(model, keyX, keyB), losvec_(losvec), cp_(cp), biasidx_(biasidx), refbiasidx_(refbiasidx), lam_(lam), inix_(inix) {};

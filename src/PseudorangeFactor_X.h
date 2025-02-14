@@ -32,7 +32,7 @@ public:
    */
     PseudorangeFactor_X(gtsam::Key keyX,
                         const gtsam::Vector& losvec,
-                        double& pr,
+                        double pr,
                         const gtsam::Vector& inix,
                         const gtsam::SharedNoiseModel& model)
   : Base(model, keyX), losvec_(losvec), pr_(pr), inix_(inix) {};

@@ -33,7 +33,7 @@ public:
                     gtsam::Key keyX2,
                     gtsam::Key keyV1,
                     gtsam::Key keyV2,
-                    const double& dt,
+                    const double dt,
                     const gtsam::SharedNoiseModel& model)
   : Base(model, keyX1, keyX2, keyV1, keyV2), dt_(dt) {};
 

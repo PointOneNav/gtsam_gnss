@@ -33,7 +33,7 @@ public:
   DopplerFactor_VD(gtsam::Key keyV,
                    gtsam::Key keyD,
                    const gtsam::Vector& losvec,
-                   const double& prr,
+                   const double prr,
                    const gtsam::Vector& iniv,
                    const gtsam::SharedNoiseModel& model)
   : Base(model, keyV, keyD), losvec_(losvec), prr_(prr), iniv_(iniv) {};

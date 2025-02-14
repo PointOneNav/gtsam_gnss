@@ -36,7 +36,7 @@ public:
   TDCPFactor_XX(gtsam::Key keyX1,
                 gtsam::Key keyX2,
                 const gtsam::Vector& losvec,
-                const double& tdcp,
+                const double tdcp,
                 const gtsam::Vector& inix1,
                 const gtsam::Vector& inix2,
                 const gtsam::SharedNoiseModel& model)

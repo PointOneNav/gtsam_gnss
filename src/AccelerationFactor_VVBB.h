@@ -35,9 +35,9 @@ public:
                           gtsam::Key keyV2,
                           gtsam::Key keyB1,
                           gtsam::Key keyB2,
-                          const double& g,
-                          const double& dt,
-                          const double& acc3d,
+                          const double g,
+                          const double dt,
+                          const double acc3d,
                           const gtsam::SharedNoiseModel& model)
   : Base(model, keyV1, keyV2, keyB1, keyB2), g_(g), dt_(dt), acc3d_(acc3d) {};
 

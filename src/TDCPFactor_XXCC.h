@@ -39,7 +39,7 @@ public:
                   gtsam::Key keyC1,
                   gtsam::Key keyC2,
                   const gtsam::Vector& losvec,
-                  const double& tdcp,
+                  const double tdcp,
                   const gtsam::Vector& inix1,
                   const gtsam::Vector& inix2,
                   const gtsam::SharedNoiseModel& model)
