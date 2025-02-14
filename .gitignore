@@ -1,6 +1,7 @@
 build*/*
 
-# VSCODE
+# IDEs
+.idea/
 .vscode/
 
 # Development

@@ -5,6 +5,21 @@ project(gtsam_gnss CXX C)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Define user options
+option(GTSAM_GNSS_BUILD_PYTHON "Build Python bindings." OFF)
+option(GTSAM_GNSS_BUILD_MATLAB "Build Matlab bindings." ON)
+
+set(WRAP_PYTHON_VERSION
+    "Default"
+    CACHE STRING "The Python version to use for wrapping")
+
+set(WRAP_TOOLBOX_INSTALL_PATH
+    "${CMAKE_INSTALL_PREFIX}/gtsam_toolbox"
+    CACHE
+      PATH
+      "Matlab toolbox destination")
+
+# Configure Microsoft-specific build options
 if(MSVC)
   add_compile_options(-DBOOST_ALL_NO_LIB)
   set(GTSAMCMakeTools_DIR "C:/Program Files (x86)/GTSAM/CMake/GTSAMCMakeTools")
@@ -23,20 +38,12 @@ find_package(GTSAMCMakeTools)
 
 # Import gtwrap package
 find_package(gtwrap)
-
-set(WRAP_PYTHON_VERSION
-    "Default"
-    CACHE STRING "The Python version to use for wrapping")
 gtwrap_get_python_version(${WRAP_PYTHON_VERSION})
 
-set(WRAP_TOOLBOX_INSTALL_PATH
-    "${CMAKE_INSTALL_PREFIX}/gtsam_toolbox"
-    CACHE
-      PATH
-      "Matlab toolbox destination")
-
-# Include the Matlab related code
-include(MatlabWrap)
+if (GTSAM_GNSS_BUILD_MATLAB)
+  # Include the Matlab related code
+  include(MatlabWrap)
+endif()
 
 # Include project headers
 include_directories("${PROJECT_SOURCE_DIR}/src")
@@ -52,10 +59,25 @@ install(
   RUNTIME DESTINATION bin)
 
 # ##############################################################################
+
+# Build Python wrapper
+if (GTSAM_GNSS_BUILD_PYTHON)
+  add_subdirectory(python)
+endif()
+
 # Build MATLAB wrapper
-matlab_wrap("gtsam_gnss.i" "${PROJECT_NAME}" "" "" "${mexFlags}" "${FilesToIgnore}" OFF)
+if (GTSAM_GNSS_BUILD_MATLAB)
+  matlab_wrap("${PROJECT_SOURCE_DIR}/gtsam_gnss.i" "${PROJECT_NAME}" "" "" "${mexFlags}" "${FilesToIgnore}" OFF)
+endif()
+
 message("========== Configuration Options ==========")
 message(STATUS "Project:                  ${PROJECT_NAME}")
-message(STATUS "MATLAB Root:              ${MATLAB_ROOT}")
-message(STATUS "Mex Compiler:             ${Matlab_MEX_COMPILER}")
+if (GTSAM_GNSS_BUILD_PYTHON)
+  message(STATUS "Python:                   ${Python_EXECUTABLE}")
+  message(STATUS "Python version:           ${WRAP_PYTHON_VERSION}")
+endif()
+if (GTSAM_GNSS_BUILD_MATLAB)
+  message(STATUS "MATLAB Root:              ${MATLAB_ROOT}")
+  message(STATUS "Mex Compiler:             ${Matlab_MEX_COMPILER}")
+endif()
 message("===========================================")

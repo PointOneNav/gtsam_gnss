@@ -1,5 +1,5 @@
 # gtsam_gnss
-This repository is a small set of custom factors and MATLAB wrappers that use [GTSAM](https://github.com/borglab/gtsam) for GNSS processing. 
+This repository is a small set of custom factors and MATLAB wrappers that use [GTSAM](https://github.com/borglab/gtsam) for GNSS processing.
 
 <u>This repository is currently under development</u>, so we will gradually add content.
 
@@ -27,6 +27,15 @@ sudo make install
 ```
 `gtsam_toolbox` is installed in `/usr/local/`
 
+### Enabling Python Support
+
+To use `gtsam_gnss` with Python, you must enable GTSAM Python support by adding the following `cmake` arguments:
+```
+-DGTSAM_BUILD_PYTHON=ON -DGTSAM_PYTHON_VERSION=3.10
+```
+replacing 3.10 with the Python version you intend to use. If you wish to use GTSAM within a Python virtual
+environment, activate the virtual environment before building GTSAM.
+
 ## gtsam_gnss
 ```shell
 git clone https://github.com/taroz/gtsam_gnss.git
@@ -39,6 +48,43 @@ sudo ldconfig
 ```
 By default, `gtsam_gnss` is installed in `user/local/gtsam_toolbox`.
 Add `user/local/gtsam_toolbox` to your MATLAB search path.
+
+### Enabling Python Support
+
+By default, the `gtsam_gnss` build will generate MATLAB wrappers. To generate Python wrappers, make sure GTSAM is built
+with Python support above, and then specify the following `cmake` argument when building `gtsam_gnss`:
+```
+-DGTSAM_GNSS_BUILD_PYTHON=ON
+```
+
+After `make` completes, you can install the Python bindings with:
+```
+make python-install
+```
+
+As with building GTSAM, if you wish to use `gtsam_gnss` within a Python  virtual environment, activate the virtual
+environment before building GTSAM.
+
+Once installed, you can import `gtsam_gnss` in Python as follows:
+```python
+import gtsam
+import gtsam_gnss
+import numpy as np
+factor = gtsam_gnss.DopplerFactor_V(
+    keyV=1,
+    losvec=gtsam.Point3(1, 0, 0),
+    prr=3,
+    iniv=gtsam.Point3(0, 2, 0),
+    model=gtsam.noiseModel.Diagonal.Sigmas(np.array((5,))))
+```
+
+### Disabling MATLAB Support
+
+If you are building only for Python and wish to disable the MATLAB wrapper compilation, set the following `cmake`
+argument:
+```
+-DGTSAM_GNSS_BUILD_MATLAB=OFF
+```
 
 # Build on Windows 11
 Building GTSAM and gtsam_gnss on Windows is a little complicated. The procedure is shown [here](./BUILD_WINDOWS.md).
