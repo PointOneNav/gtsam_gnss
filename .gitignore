@@ -7,3 +7,5 @@ build*/*
 # Development
 .dev/
 
+# Python pickle cache files
+*.pkl
